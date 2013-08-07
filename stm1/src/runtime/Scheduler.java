@@ -4,15 +4,15 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Scheduler {
-	
+
 	/* This simplified scheduler only has one single state machine */
 	private IStateMachine stm;
 	private BlockingDeque<String> inputQueue = new LinkedBlockingDeque<String>();
-	
+
 	public Scheduler(IStateMachine stm) {
 		this.stm = stm;
 	}
-	
+
 	public void run() {
 		boolean running = true;
 		while(running) {
@@ -34,7 +34,7 @@ public class Scheduler {
 			}
 		}
 	}
-	
+
 	/**
 	 * Normal events are enqueued at the end of the queue.
 	 * @param event - the name of the event
@@ -42,7 +42,7 @@ public class Scheduler {
 	void addToQueueLast(String eventId) {
 		inputQueue.addLast(eventId);
 	}
-	
+
 	/**
 	 * Timeouts are added at the first place of the queue.
 	 * @param event - the name of the timer
@@ -50,9 +50,8 @@ public class Scheduler {
 	void addToQueueFirst(String timerId) {
 		inputQueue.addFirst(timerId);
 	}
-	
+
 	private void log(String message) {
 		System.out.println(message);
 	}
-
 }
