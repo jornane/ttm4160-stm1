@@ -22,8 +22,8 @@ public class PeriodicTimerMachine implements IStateMachine {
 			}  
 		} else if(state==STATES.ACTIVE) {
 			if(event.equals(STOP)) {
-				t1.start(scheduler, 1000);
-				state = STATES.ACTIVE;
+				t1.stop();
+				state = STATES.IDLE;
 				return EXECUTE_TRANSITION;
 			} else if (event.equals(TIMER_1)) {
 				System.out.println("tick");
