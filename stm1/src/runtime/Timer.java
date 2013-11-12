@@ -10,8 +10,6 @@ import java.util.TimerTask;
 public class Timer {
 	
 	private String timerId;
-	private Scheduler scheduler;
-	private long delay;
 	private TimerTask task;
 	private java.util.Timer timer;
 	
@@ -32,11 +30,6 @@ public class Timer {
 	public void stop() {
 		task.cancel();
 		task = null;
-	}
-	
-	public void restart() {
-		this.stop();
-		this.start(scheduler, delay);
 	}
 	
 	public String getId() {
