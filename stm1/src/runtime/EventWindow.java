@@ -27,22 +27,26 @@ public class EventWindow {
 	}
 
 	public void show() {
-		frame = new JFrame("Events");
-		frame.setLayout(new GridLayout(events.length, 1));
-
-		for(String buttonText: events) {
-			final JButton button = new JButton();
-			button.setText(buttonText);
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					scheduler.addToQueueLast(button.getText());
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				frame = new JFrame("Events");
+				frame.setLayout(new GridLayout(events.length, 1));
+		
+				for(String buttonText: events) {
+					final JButton button = new JButton();
+					button.setText(buttonText);
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							scheduler.addToQueueLast(button.getText());
+						}
+					});
+					frame.getContentPane().add(button);
 				}
-			});
-			frame.getContentPane().add(button);
-		}
-
-		frame.setVisible(true);
-		frame.pack();
+		
+				frame.setVisible(true);
+				frame.pack();
+			}});
 	}
 
 }
