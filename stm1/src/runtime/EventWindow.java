@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  * The event window is used to generate events by pressing a button. 
@@ -49,6 +51,14 @@ public class EventWindow {
 		
 				frame.setVisible(true);
 				frame.pack();
+			}});
+	}
+	
+	public void close() {
+		SwingUtilities.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				frame.dispose();
 			}});
 	}
 

@@ -19,6 +19,10 @@ public class PeriodicTimerMachine implements IStateMachine {
 				t1.start(scheduler, 1000);
 				state = State.ACTIVE;
 				return EXECUTE_TRANSITION;
+			} else if(event.equals(EXIT)) {
+				state = null;
+				t1.terminate();
+				return TERMINATE_SYSTEM;
 			}
 		} else if(state==State.ACTIVE) {
 			if(event.equals(STOP)) {
@@ -30,6 +34,10 @@ public class PeriodicTimerMachine implements IStateMachine {
 				t1.start(scheduler, 1000);
 				state = State.ACTIVE;
 				return EXECUTE_TRANSITION;
+			} else if(event.equals(EXIT)) {
+				state = null;
+				t1.terminate();
+				return TERMINATE_SYSTEM;
 			}
 		}
 		return DISCARD_EVENT;
@@ -43,5 +51,7 @@ public class PeriodicTimerMachine implements IStateMachine {
 		w.show();
 
 		s.run();
+		
+		w.close();
 	}
 }

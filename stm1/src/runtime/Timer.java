@@ -35,4 +35,8 @@ public class Timer {
 	public String getId() {
 		return timerId;
 	}
+
+	public void terminate() {
+		timer.cancel();
+	}
 }
