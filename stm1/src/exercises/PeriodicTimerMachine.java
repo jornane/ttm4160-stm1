@@ -7,28 +7,28 @@ import runtime.Timer;
 
 public class PeriodicTimerMachine implements IStateMachine {
 	
-	private static final String START = "Start", STOP = "Stop", TIMER_1 = "t1";	
-	public static final String[] EVENTS = {START, STOP};
-	private enum STATES {IDLE, ACTIVE, FINAL}
+	private static final String START = "Start", STOP = "Stop", EXIT = "Exit", TIMER_1 = "t1";	
+	public static final String[] EVENTS = {START, STOP, EXIT};
+	private enum State {IDLE, ACTIVE, FINAL}
 	private Timer t1 = new Timer("t1");
-	protected STATES state = STATES.IDLE;
+	protected State state = State.IDLE;
 
 	public int fire(String event, Scheduler scheduler) {
-		if(state==STATES.IDLE) {
+		if(state==State.IDLE) {
 			if(event.equals(START)) {
 				t1.start(scheduler, 1000);
-				state = STATES.ACTIVE;
+				state = State.ACTIVE;
 				return EXECUTE_TRANSITION;
-			}  
-		} else if(state==STATES.ACTIVE) {
+			}
+		} else if(state==State.ACTIVE) {
 			if(event.equals(STOP)) {
 				t1.stop();
-				state = STATES.IDLE;
+				state = State.IDLE;
 				return EXECUTE_TRANSITION;
 			} else if (event.equals(TIMER_1)) {
 				System.out.println("tick");
 				t1.start(scheduler, 1000);
-				state = STATES.ACTIVE;
+				state = State.ACTIVE;
 				return EXECUTE_TRANSITION;
 			}
 		}
