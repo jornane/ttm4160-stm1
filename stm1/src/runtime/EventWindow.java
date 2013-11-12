@@ -32,6 +32,9 @@ public class EventWindow {
 			public void run() {
 				frame = new JFrame("Events");
 				frame.setLayout(new GridLayout(events.length, 1));
+				// Implementing state machine shutdown on #dispose() would be better,
+				// but is too complex for this example
+				frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		
 				for(String buttonText: events) {
 					final JButton button = new JButton();
